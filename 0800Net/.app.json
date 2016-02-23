@@ -4,16 +4,40 @@
     {
       "type": "kendo-ui-mobile:view",
       "name": "home",
-      "components": [],
-      "title": "Home View",
-      "addToNavigation": true,
-      "icon": "home"
+      "components": [
+        {
+          "type": "kendo-ui-mobile:list",
+          "name": "homeModel",
+          "dataProvider": "zeroOitocentos",
+          "collection": "Solicitacao",
+          "headerField": "Id",
+          "subHeaderField": "SolTitulo",
+          "group": "NomeCliente",
+          "masterDetails": true,
+          "detailHeaderField": "Id",
+          "detailSubHeaderField": "SolTitulo",
+          "detailDescriptionField": "NomeCliente",
+          "pullToRefresh": true,
+          "endlessScroll": false
+        }
+      ],
+      "title": "Chamados",
+      "addToNavigation": false
     }
   ],
-  "dataProviders": [],
+  "dataProviders": [
+    {
+      "type": "kendo-ui-mobile:dataProvider",
+      "name": "zeroOitocentos",
+      "title": "0800Net / 0800Net",
+      "source": "everlive",
+      "everliveKey": "6imjrfulirub3yim",
+      "offlineStorage": true
+    }
+  ],
   "name": "kendoUiMobileApp",
   "navigation": "tabstrip",
   "view": "home",
   "transition": "slide",
-  "skin": "flat"
+  "skin": "nova"
 }
