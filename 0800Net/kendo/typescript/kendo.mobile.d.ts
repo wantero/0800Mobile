@@ -264,6 +264,7 @@ declare module kendo {
         tagName?: string;
         wrap?: boolean;
         model?: Object;
+        evalTemplate?: boolean;
         init?: (e: ViewEvent) => void;
         show?: (e: ViewEvent) => void;
         hide?: (e: ViewEvent) => void;
@@ -1366,6 +1367,17 @@ declare module kendo.ui {
     interface GridColumn {
         editor?(container: JQuery, options: GridColumnEditorOptions): void;
     }
+
+    interface TreeListEditorOptions {
+        field?: string;
+        format?: string;
+        model?: kendo.data.Model;
+        values?: any[];
+    }
+
+    interface TreeListColumn {
+        editor?(container: JQuery, options: TreeListEditorOptions): void;
+    }
 }
 
 declare module kendo.mobile {
@@ -1549,6 +1561,12 @@ Inherited from Element.clip
         */
         clip?: kendo.drawing.Path;
         /**
+        The element cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The fill options of the shape.
         @member {kendo.drawing.FillOptions}
         */
@@ -1704,6 +1722,12 @@ Inherited from Element.clip
         */
         clip?: kendo.drawing.Path;
         /**
+        The element cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The fill options of the shape.
         @member {kendo.drawing.FillOptions}
         */
@@ -1820,6 +1844,11 @@ It can be replaced by calling the clip method.
         */
         clip?: kendo.drawing.Path;
         /**
+        The element CSS cursor.Applicable to SVG and VML outputs.
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The element opacity.
         @member {number}
         */
@@ -1853,11 +1882,11 @@ It can be replaced by calling the clip method.
 | #ff0000        | Hex RGB value
 | rgb(255, 0, 0) | RGB valueSpecifying 'none', 'transparent' or '' (empty string) will clear the fill.
                 */
-                color: string;
+                color?: string;
         /**
                 The fill opacity. Ranges from 0 (completely transparent) to 1 (completely opaque).
                 */
-                opacity: number;
+                opacity?: number;
 
 
 
@@ -2065,6 +2094,12 @@ Inherited from Element.clip
         */
         clip?: kendo.drawing.Path;
         /**
+        The group cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The group opacity.
 Inherited from Element.opacityThe opacity of any child groups and elements will be multiplied by this value.
         @member {number}
@@ -2210,6 +2245,12 @@ Inherited from Element.clip
         */
         clip?: kendo.drawing.Path;
         /**
+        The element cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The element opacity.
 Inherited from Element.opacity
         @member {number}
@@ -2267,17 +2308,17 @@ Inherited from Element.visible
     interface LayoutOptions {
         name?: string;
         /**
-        Specifies the alignment of the content.
+        Specifies the alignment of the content. The supported values are:
         @member {string}
         */
         alignContent?: string;
         /**
-        Specifies the alignment of the items based.
+        Specifies the alignment of the items based on the largest one. The supported values are:
         @member {string}
         */
         alignItems?: string;
         /**
-        Specifies how should the content be justified.
+        Specifies how should the content be justified. The supported values are:
         @member {string}
         */
         justifyContent?: string;
@@ -2637,6 +2678,12 @@ Inherited from Element.clip
         */
         clip?: kendo.drawing.Path;
         /**
+        The element cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The fill options of the shape.
         @member {kendo.drawing.FillOptions}
         */
@@ -2725,37 +2772,37 @@ will not trigger options change on the observer (if any).
         /**
                 The creator of the PDF document.
                 */
-                creator: string;
+                creator?: string;
         /**
                 The date when the PDF document is created. Defaults to new Date().
                 */
-                date: Date;
+                date?: Date;
         /**
                 Specifies the keywords of the exported PDF file.
                 */
-                keywords: string;
+                keywords?: string;
         /**
                 Set to true to reverse the paper dimensions if needed such that width is the larger edge.
                 */
-                landscape: boolean;
+                landscape?: boolean;
         /**
                 Specifies the margins of the page (numbers or strings with units). Supported
 units are "mm", "cm", "in" and "pt" (default).
                 */
-                margin: any;
+                margin?: any;
         /**
                 Specifies the paper size of the PDF document.
 The default "auto" means paper size is determined by content.Supported values:
                 */
-                paperSize: any;
+                paperSize?: any;
         /**
                 Sets the subject of the PDF file.
                 */
-                subject: string;
+                subject?: string;
         /**
                 Sets the title of the PDF file.
                 */
-                title: string;
+                title?: string;
 
 
 
@@ -3005,6 +3052,12 @@ Inherited from Element.clip
         */
         clip?: kendo.drawing.Path;
         /**
+        The element cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The fill options of the shape.
         @member {kendo.drawing.FillOptions}
         */
@@ -3111,9 +3164,9 @@ Inherited from Gradient.removeStop
         /**
         The center of the gradient.Coordinates are relative to the shape bounding box.
 For example [0, 0] is top left and [1, 1] is bottom right.
-        @member {any}
+        @member {any|kendo.geometry.Point}
         */
-        center?: any;
+        center?: any|kendo.geometry.Point;
         /**
         The radius of the radial gradient relative to the shape bounding box.
         @member {number}
@@ -3253,6 +3306,12 @@ Inherited from Element.clip
         */
         clip?: kendo.drawing.Path;
         /**
+        The element cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The fill options of the shape.
         @member {kendo.drawing.FillOptions}
         */
@@ -3357,7 +3416,7 @@ Inherited from Element.visible
 | #ff0000        | Hex RGB value
 | rgb(255, 0, 0) | RGB valueSpecifying 'none', 'transparent' or '' (empty string) will clear the stroke.
                 */
-                color: string;
+                color?: string;
         /**
                 The stroke dash type.| Value            |                                              | Description
 | ---              | :---:                                        | ---
@@ -3369,7 +3428,7 @@ Inherited from Element.visible
 | longDashDotDot |  | a line consisting of a repeating pattern of long-dash dot-dot
 | solid          |              | a solid line
                 */
-                dashType: string;
+                dashType?: string;
         /**
                 The stroke line cap style.| Value    |                                     | Description
 | ---      | :---:                               | ---
@@ -3377,7 +3436,7 @@ Inherited from Element.visible
 | round  |   | a rounded cap
 | square |  | a square cap
                 */
-                lineCap: string;
+                lineCap?: string;
         /**
                 The stroke line join style.| Value   |                                     | Description
 | ---     | :---:                               | ---
@@ -3385,15 +3444,15 @@ Inherited from Element.visible
 | miter |  | a square join
 | round |  | a rounded join
                 */
-                lineJoin: string;
+                lineJoin?: string;
         /**
                 The stroke opacity. Ranges from 0 (completely transparent) to 1 (completely opaque).
                 */
-                opacity: number;
+                opacity?: number;
         /**
                 The stroke width in pixels.
                 */
-                width: number;
+                width?: number;
 
 
 
@@ -3655,6 +3714,12 @@ Inherited from Element.clip
         @member {kendo.drawing.Path}
         */
         clip?: kendo.drawing.Path;
+        /**
+        The element cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
         /**
         The fill options of the text.
         @member {kendo.drawing.FillOptions}
@@ -4825,7 +4890,7 @@ If no culture is found the default one is used.
         */
         htmlEncode(value: string): string;
         function /**
-        Parses as a formatted string as a Date.
+        Parses as a formatted string as a Date. Also see Date Parsing
         @method
         @param value - The string which should be parsed as Date.
         @param formats - The format(s) that will be used to parse the date. By default all standard date formats of the current culture are used.
@@ -4834,7 +4899,7 @@ If no culture is found the default one is used.
         */
         parseDate(value: string, formats?: string, culture?: string): Date;
         function /**
-        Parses as a formatted string as a Date.
+        Parses as a formatted string as a Date. Also see Date Parsing
         @method
         @param value - The string which should be parsed as Date.
         @param formats - The format(s) that will be used to parse the date. By default all standard date formats of the current culture are used.
@@ -4866,6 +4931,17 @@ If no culture is found the default one is used.
         @returns A Color object.
         */
         parseColor(color: string, noerror: boolean): kendo.Color;
+        function /**
+        Creates a wrapper object over the passed one, with get/set properties that set the original object dirty flag. Suitable for a scenario where a dataSource item is used in a third-party MVVM implementation, like AngularJS.
+        @method
+        */
+        proxyModelSetters(): void;
+        function /**
+        Creates a wrapper object over the passed one, with get/set properties that set the original object dirty flag. Suitable for a scenario where a dataSource item is used in a third-party MVVM implementation, like AngularJS.
+        @method
+        @param data - The model that will be wrapped.
+        */
+        proxyModelSetters(data: kendo.data.Model): void;
         function /**
         Finds all Kendo widgets that are children of the specified element and calls their resize method.
         @method
@@ -5006,19 +5082,19 @@ declare module kendo.mobile.ui {
     interface ActionSheetPopup {
         /**
         The direction to which the popup will expand, relative to the target that opened it.
-        @member {any}
+        @member {number|string}
         */
-        direction?: any;
+        direction?: number|string;
         /**
         The height of the popup in pixels.
-        @member {any}
+        @member {number|string}
         */
-        height?: any;
+        height?: number|string;
         /**
         The width of the popup in pixels.
-        @member {any}
+        @member {number|string}
         */
-        width?: any;
+        width?: number|string;
     }
 
     interface ActionSheetOptions {
@@ -5793,9 +5869,9 @@ If this is not case the field must be defined.
         autoBind?: boolean;
         /**
         Instance of DataSource or the data that the mobile ListView will be bound to.
-        @member {any}
+        @member {kendo.data.DataSource|any}
         */
-        dataSource?: any;
+        dataSource?: kendo.data.DataSource|any;
         /**
         If set to true, the listview gets the next page of data when the user scrolls near the bottom of the view.
         @member {boolean}
@@ -5809,9 +5885,9 @@ Applicable only when the type is set to group, or when binding to grouped DataSo
         fixedHeaders?: boolean;
         /**
         The header item template (applicable when the type is set to group).
-        @member {any}
+        @member {string|Function}
         */
-        headerTemplate?: any;
+        headerTemplate?: string|Function;
         /**
         If set to true, a button is rendered at the bottom of the listview. Tapping it fetches and displays the items from the next page of the DataSource.
         @member {boolean}
@@ -5840,9 +5916,9 @@ Previously loaded pages in the DataSource are also discarded.
         style?: string;
         /**
         The item template.
-        @member {any}
+        @member {string|Function}
         */
-        template?: any;
+        template?: string|Function;
         /**
         The type of the control. Can be either flat (default) or group. Determined automatically in databound mode.
         @member {string}
@@ -5972,9 +6048,9 @@ Note: The dataItem must be from a non-primitive type (Object).
         /**
         Open the ModalView
         @method
-        @param target - (optional) The target of the ModalView
+        @param target - The target of the ModalView
         */
-        open(target: JQuery): void;
+        open(target?: JQuery): void;
 
     }
 
@@ -6257,14 +6333,14 @@ Note: The dataItem must be from a non-primitive type (Object).
     interface PopOverPopup {
         /**
         The height of the popup in pixels.
-        @member {any}
+        @member {number|string}
         */
-        height?: any;
+        height?: number|string;
         /**
         The width of the popup in pixels.
-        @member {any}
+        @member {number|string}
         */
-        width?: any;
+        width?: number|string;
     }
 
     interface PopOverOptions {
@@ -6391,14 +6467,14 @@ Note: The dataItem must be from a non-primitive type (Object).
         bounceVelocityThreshold?: number;
         /**
         The height of the ScrollView content. Supports 100% if the ScrollView is embedded in a stretched view and the ScrollView element is an immediate child of the view element.
-        @member {any}
+        @member {number|string}
         */
-        contentHeight?: any;
+        contentHeight?: number|string;
         /**
         Instance of DataSource that the mobile ScrollView will be bound to. If DataSource is set, the widget will operate in data bound mode.
-        @member {any}
+        @member {kendo.data.DataSource|any}
         */
-        dataSource?: any;
+        dataSource?: kendo.data.DataSource|any;
         /**
         The milliseconds that take the ScrollView to snap to the current page after released.
         @member {number}
@@ -7508,12 +7584,84 @@ frozenRows instead.
         rowSplit?: number;
     }
 
+    interface WorkbookSheetRowCellBorderBottom {
+        /**
+        The bottom border color of the cell.Many standard CSS formats are supported, but the canonical form is "#ccff00".
+        @member {string}
+        */
+        color?: string;
+        /**
+        The width of the border in pixels.
+        @member {string}
+        */
+        size?: string;
+    }
+
+    interface WorkbookSheetRowCellBorderLeft {
+        /**
+        The left border color of the cell.Many standard CSS formats are supported, but the canonical form is "#ccff00".
+        @member {string}
+        */
+        color?: string;
+        /**
+        The width of the border in pixels.
+        @member {string}
+        */
+        size?: string;
+    }
+
+    interface WorkbookSheetRowCellBorderRight {
+        /**
+        The right border color of the cell.Many standard CSS formats are supported, but the canonical form is "#ccff00".
+        @member {string}
+        */
+        color?: string;
+        /**
+        The width of the border in pixels.
+        @member {string}
+        */
+        size?: string;
+    }
+
+    interface WorkbookSheetRowCellBorderTop {
+        /**
+        The top border color of the cell.Many standard CSS formats are supported, but the canonical form is "#ccff00".
+        @member {string}
+        */
+        color?: string;
+        /**
+        The width of the border in pixels.
+        @member {string}
+        */
+        size?: string;
+    }
+
     interface WorkbookSheetRowCell {
         /**
         Sets the background color of the cell. Supports hex CSS-like values that start with "#" e.g. "#ff00ff".
         @member {string}
         */
         background?: string;
+        /**
+        The style information for the bottom border of the cell.
+        @member {WorkbookSheetRowCellBorderBottom}
+        */
+        borderBottom?: WorkbookSheetRowCellBorderBottom;
+        /**
+        The style information for the left border of the cell.
+        @member {WorkbookSheetRowCellBorderLeft}
+        */
+        borderLeft?: WorkbookSheetRowCellBorderLeft;
+        /**
+        The style information for the top border of the cell.
+        @member {WorkbookSheetRowCellBorderTop}
+        */
+        borderTop?: WorkbookSheetRowCellBorderTop;
+        /**
+        The style information for the right border of the cell.
+        @member {WorkbookSheetRowCellBorderRight}
+        */
+        borderRight?: WorkbookSheetRowCellBorderRight;
         /**
         Setting it to true makes the cell value bold.
         @member {boolean}
@@ -7596,9 +7744,9 @@ frozenRows instead.
         verticalAlign?: string;
         /**
         The value of the cell. Numbers and dates will be formatted as strings. String values are HTML encoded.
-        @member {any}
+        @member {Date|number|string|boolean}
         */
-        value?: any;
+        value?: Date|number|string|boolean;
     }
 
     interface WorkbookSheetRow {
@@ -7797,6 +7945,12 @@ Inherited from Element.clip
         */
         clip?: kendo.drawing.Path;
         /**
+        The element cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The fill options of the shape.
         @member {kendo.drawing.FillOptions}
         */
@@ -7952,6 +8106,12 @@ Inherited from Element.clip
         */
         clip?: kendo.drawing.Path;
         /**
+        The element cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The fill options of the shape.
         @member {kendo.drawing.FillOptions}
         */
@@ -8068,6 +8228,11 @@ It can be replaced by calling the clip method.
         */
         clip?: kendo.drawing.Path;
         /**
+        The element CSS cursor.Applicable to SVG and VML outputs.
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The element opacity.
         @member {number}
         */
@@ -8101,11 +8266,11 @@ It can be replaced by calling the clip method.
 | #ff0000        | Hex RGB value
 | rgb(255, 0, 0) | RGB valueSpecifying 'none', 'transparent' or '' (empty string) will clear the fill.
                 */
-                color: string;
+                color?: string;
         /**
                 The fill opacity. Ranges from 0 (completely transparent) to 1 (completely opaque).
                 */
-                opacity: number;
+                opacity?: number;
 
 
 
@@ -8313,6 +8478,12 @@ Inherited from Element.clip
         */
         clip?: kendo.drawing.Path;
         /**
+        The group cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The group opacity.
 Inherited from Element.opacityThe opacity of any child groups and elements will be multiplied by this value.
         @member {number}
@@ -8458,6 +8629,12 @@ Inherited from Element.clip
         */
         clip?: kendo.drawing.Path;
         /**
+        The element cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The element opacity.
 Inherited from Element.opacity
         @member {number}
@@ -8515,17 +8692,17 @@ Inherited from Element.visible
     interface LayoutOptions {
         name?: string;
         /**
-        Specifies the alignment of the content.
+        Specifies the alignment of the content. The supported values are:
         @member {string}
         */
         alignContent?: string;
         /**
-        Specifies the alignment of the items based.
+        Specifies the alignment of the items based on the largest one. The supported values are:
         @member {string}
         */
         alignItems?: string;
         /**
-        Specifies how should the content be justified.
+        Specifies how should the content be justified. The supported values are:
         @member {string}
         */
         justifyContent?: string;
@@ -8885,6 +9062,12 @@ Inherited from Element.clip
         */
         clip?: kendo.drawing.Path;
         /**
+        The element cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The fill options of the shape.
         @member {kendo.drawing.FillOptions}
         */
@@ -8973,37 +9156,37 @@ will not trigger options change on the observer (if any).
         /**
                 The creator of the PDF document.
                 */
-                creator: string;
+                creator?: string;
         /**
                 The date when the PDF document is created. Defaults to new Date().
                 */
-                date: Date;
+                date?: Date;
         /**
                 Specifies the keywords of the exported PDF file.
                 */
-                keywords: string;
+                keywords?: string;
         /**
                 Set to true to reverse the paper dimensions if needed such that width is the larger edge.
                 */
-                landscape: boolean;
+                landscape?: boolean;
         /**
                 Specifies the margins of the page (numbers or strings with units). Supported
 units are "mm", "cm", "in" and "pt" (default).
                 */
-                margin: any;
+                margin?: any;
         /**
                 Specifies the paper size of the PDF document.
 The default "auto" means paper size is determined by content.Supported values:
                 */
-                paperSize: any;
+                paperSize?: any;
         /**
                 Sets the subject of the PDF file.
                 */
-                subject: string;
+                subject?: string;
         /**
                 Sets the title of the PDF file.
                 */
-                title: string;
+                title?: string;
 
 
 
@@ -9253,6 +9436,12 @@ Inherited from Element.clip
         */
         clip?: kendo.drawing.Path;
         /**
+        The element cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The fill options of the shape.
         @member {kendo.drawing.FillOptions}
         */
@@ -9359,9 +9548,9 @@ Inherited from Gradient.removeStop
         /**
         The center of the gradient.Coordinates are relative to the shape bounding box.
 For example [0, 0] is top left and [1, 1] is bottom right.
-        @member {any}
+        @member {any|kendo.geometry.Point}
         */
-        center?: any;
+        center?: any|kendo.geometry.Point;
         /**
         The radius of the radial gradient relative to the shape bounding box.
         @member {number}
@@ -9501,6 +9690,12 @@ Inherited from Element.clip
         */
         clip?: kendo.drawing.Path;
         /**
+        The element cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
+        /**
         The fill options of the shape.
         @member {kendo.drawing.FillOptions}
         */
@@ -9605,7 +9800,7 @@ Inherited from Element.visible
 | #ff0000        | Hex RGB value
 | rgb(255, 0, 0) | RGB valueSpecifying 'none', 'transparent' or '' (empty string) will clear the stroke.
                 */
-                color: string;
+                color?: string;
         /**
                 The stroke dash type.| Value            |                                              | Description
 | ---              | :---:                                        | ---
@@ -9617,7 +9812,7 @@ Inherited from Element.visible
 | longDashDotDot |  | a line consisting of a repeating pattern of long-dash dot-dot
 | solid          |              | a solid line
                 */
-                dashType: string;
+                dashType?: string;
         /**
                 The stroke line cap style.| Value    |                                     | Description
 | ---      | :---:                               | ---
@@ -9625,7 +9820,7 @@ Inherited from Element.visible
 | round  |   | a rounded cap
 | square |  | a square cap
                 */
-                lineCap: string;
+                lineCap?: string;
         /**
                 The stroke line join style.| Value   |                                     | Description
 | ---     | :---:                               | ---
@@ -9633,15 +9828,15 @@ Inherited from Element.visible
 | miter |  | a square join
 | round |  | a rounded join
                 */
-                lineJoin: string;
+                lineJoin?: string;
         /**
                 The stroke opacity. Ranges from 0 (completely transparent) to 1 (completely opaque).
                 */
-                opacity: number;
+                opacity?: number;
         /**
                 The stroke width in pixels.
                 */
-                width: number;
+                width?: number;
 
 
 
@@ -9903,6 +10098,12 @@ Inherited from Element.clip
         @member {kendo.drawing.Path}
         */
         clip?: kendo.drawing.Path;
+        /**
+        The element cursor.
+Inherited from Element.cursor
+        @member {string}
+        */
+        cursor?: string;
         /**
         The fill options of the text.
         @member {kendo.drawing.FillOptions}

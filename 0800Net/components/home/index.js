@@ -58,6 +58,10 @@ app.home = kendo.observable({
                             field: 'SolTitulo',
                             defaultValue: ''
                         },
+                        'DataAberturaSistema': {
+                            field: 'DataAberturaSistema',
+                            defaultValue: ''
+                        },
                     }
                 }
             },

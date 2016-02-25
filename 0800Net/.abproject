@@ -3,9 +3,9 @@
   "ProjectGuid": "456661c2-82d8-4415-81cb-5206decd5867",
   "projectVersion": 1,
   "AppIdentifier": "com.telerik.the0800Net",
-  "DisplayName": "0800Net",
+  "DisplayName": "Chamados Abertos",
   "Author": "",
-  "Description": "0800Net",
+  "Description": "Chamados em Abertos do 0800Net",
   "BundleVersion": "1.0",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
