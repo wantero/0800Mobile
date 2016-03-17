@@ -1,9 +1,6 @@
 {
   "CorePlugins": [
-    "com.phonegap.plugins.PushPlugin@3.1.1",
-    "com.telerik.feedback@2.0.0",
     "com.telerik.LivePatch",
-    "com.telerik.plugin.telerikanalytics@3.3.2",
     "org.apache.cordova.battery-status",
     "org.apache.cordova.camera",
     "org.apache.cordova.contacts",
@@ -21,7 +18,10 @@
     "org.apache.cordova.network-information",
     "org.apache.cordova.splashscreen",
     "org.apache.cordova.statusbar",
-    "org.apache.cordova.vibration"
+    "org.apache.cordova.vibration",
+    "com.phonegap.plugins.PushPlugin@3.1.1",
+    "com.telerik.feedback@2.0.0",
+    "com.telerik.plugin.telerikanalytics@3.3.2"
   ],
   "CordovaPluginVariables": {
     "com.telerik.plugin.telerikanalytics": {
