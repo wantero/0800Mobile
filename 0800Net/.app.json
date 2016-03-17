@@ -3,39 +3,51 @@
   "views": [
     {
       "type": "kendo-ui-mobile:view",
-      "name": "clientesListView",
       "components": [
         {
-          "type": "kendo-ui-mobile:list",
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "components": [],
           "name": "clientesListViewModel",
           "dataProvider": "teste",
           "collection": "teste",
           "headerField": "teste",
-          "masterDetails": false,
           "pullToRefresh": false,
-          "endlessScroll": false
+          "endlessScroll": false,
+          "deleteItemButton": false,
+          "deleteItemConfirmation": true,
+          "addItemForm": false,
+          "editItemForm": false
         }
       ],
       "title": "Chamados por Clientes",
+      "name": "clientesListView",
       "addToNavigation": true,
       "icon": "globe"
     },
     {
       "type": "kendo-ui-mobile:view",
-      "name": "usuariosListView",
       "components": [
         {
-          "type": "kendo-ui-mobile:list",
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "components": [],
           "name": "usuariosListViewModel",
           "dataProvider": "teste",
           "collection": "teste",
           "headerField": "Text",
-          "masterDetails": false,
           "pullToRefresh": false,
-          "endlessScroll": false
+          "endlessScroll": false,
+          "deleteItemButton": false,
+          "deleteItemConfirmation": true,
+          "addItemForm": false,
+          "editItemForm": false
         }
       ],
       "title": "Chamados por Usuários",
+      "name": "usuariosListView",
       "addToNavigation": true,
       "icon": "contacts"
     }
@@ -43,8 +55,8 @@
   "dataProviders": [
     {
       "type": "kendo-ui-mobile:dataProvider",
-      "name": "zeroOitocentos",
       "title": "0800Net / 0800Net",
+      "name": "zeroOitocentos",
       "source": "everlive",
       "everliveKey": "6imjrfulirub3yim",
       "offlineStorage": true
