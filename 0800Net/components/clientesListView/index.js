@@ -1,6 +1,6 @@
 'use strict';
 
-app.home = kendo.observable({
+app.clientesListView = kendo.observable({
     onShow: function() {},
     afterShow: function() {}
 });
@@ -67,31 +67,18 @@ app.home = kendo.observable({
             },
         },
         dataSource = new kendo.data.DataSource(dataSourceOptions),
-        homeModel = kendo.observable({
-            dataSource: dataSource,
-            itemClick: function(e) {
-                app.mobileApp.navigate('#components/home/details.html?uid=' + e.dataItem.uid);
-            },
-            detailsShow: function(e) {
-                var item = e.view.params.uid,
-                    dataSource = homeModel.get('dataSource'),
-                    itemModel = dataSource.getByUid(item);
-                if (!itemModel.Id) {
-                    itemModel.Id = String.fromCharCode(160);
-                }
-                homeModel.set('currentItem', itemModel);
-            },
-            currentItem: null
+        clientesListViewModel = kendo.observable({
+            dataSource: dataSource
         });
 
     if (typeof dataProvider.sbProviderReady === 'function') {
         dataProvider.sbProviderReady(function dl_sbProviderReady() {
-            parent.set('homeModel', homeModel);
+            parent.set('clientesListViewModel', clientesListViewModel);
         });
     } else {
-        parent.set('homeModel', homeModel);
+        parent.set('clientesListViewModel', clientesListViewModel);
     }
-})(app.home);
+})(app.clientesListView);
 
 // START_CUSTOM_CODE_homeModel
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes

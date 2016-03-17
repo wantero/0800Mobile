@@ -3,26 +3,41 @@
   "views": [
     {
       "type": "kendo-ui-mobile:view",
-      "name": "home",
+      "name": "clientesListView",
       "components": [
         {
           "type": "kendo-ui-mobile:list",
-          "name": "homeModel",
-          "dataProvider": "zeroOitocentos",
-          "collection": "Solicitacao",
-          "headerField": "Id",
-          "subHeaderField": "SolTitulo",
-          "group": "NomeCliente",
-          "masterDetails": true,
-          "detailHeaderField": "Id",
-          "detailSubHeaderField": "SolTitulo",
-          "detailDescriptionField": "NomeCliente",
-          "pullToRefresh": true,
+          "name": "clientesListViewModel",
+          "dataProvider": "teste",
+          "collection": "teste",
+          "headerField": "teste",
+          "masterDetails": false,
+          "pullToRefresh": false,
           "endlessScroll": false
         }
       ],
-      "title": "Chamados",
-      "addToNavigation": false
+      "title": "Chamados por Clientes",
+      "addToNavigation": true,
+      "icon": "globe"
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "name": "usuariosListView",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:list",
+          "name": "usuariosListViewModel",
+          "dataProvider": "teste",
+          "collection": "teste",
+          "headerField": "Text",
+          "masterDetails": false,
+          "pullToRefresh": false,
+          "endlessScroll": false
+        }
+      ],
+      "title": "Chamados por Usuários",
+      "addToNavigation": true,
+      "icon": "contacts"
     }
   ],
   "dataProviders": [
@@ -36,8 +51,7 @@
     }
   ],
   "name": "kendoUiMobileApp",
-  "navigation": "tabstrip",
-  "view": "home",
-  "transition": "slide",
+  "navigation": "drawer",
+  "view": "clientesListView",
   "skin": "nova"
 }
