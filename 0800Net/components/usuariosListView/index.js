@@ -33,10 +33,21 @@ app.usuariosListView = kendo.observable({
             type: 'everlive',
             transport: {
                 typeName: 'Solicitacao',
-                dataProvider: dataProvider
+                dataProvider: dataProvider,
+                read: {
+                        headers: {
+                            "X-Everlive-Expand": JSON.stringify({
+                                   "UsuIDResponsavel": {
+            					       "TargetTypeName": "Usuario",
+                                       "ReturnAs": "UsuNome",
+                        			   "SingleField": "UsuNome"
+        							}
+                            })
+                    }
+                }                
             },
             group: {
-                field: 'NomeCliente'
+                field: 'UsuNome'
             },
 
             change: function(e) {
@@ -62,6 +73,10 @@ app.usuariosListView = kendo.observable({
                             field: 'DataAberturaSistema',
                             defaultValue: ''
                         },
+                        'UsuNome': {
+                            field: 'UsuNome', // show the user's DisplayName instead of the UserId
+                            defaultValue: ''
+                        },                        
                     }
                 }
             },
