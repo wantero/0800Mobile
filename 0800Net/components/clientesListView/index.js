@@ -63,6 +63,16 @@ app.clientesListView = kendo.observable({
                             defaultValue: ''
                         },
                     }
+                },
+                parse : function(data) { //reduce text of message if being used for list
+                    $.each(data, function(i, val){                        
+                        if (i == 'result') {
+                            for (var j = 0; j < val.length; j++) {
+                                val[j].DataAberturaSistema = kendo.toString(val[j].DataAberturaSistema, "d/M/yyyy hh:mm tt");
+                            }                                                    
+                        }
+                    });
+                    return data;
                 }
             },
         },
