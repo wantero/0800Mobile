@@ -11,6 +11,27 @@ app.clientesListView = kendo.observable({
 // END_CUSTOM_CODE_home
 (function(parent) {
     var dataProvider = app.data.zeroOitocentos,
+        fetchFilteredData = function(paramFilter, searchFilter) {
+            var model = parent.get('clientesListViewModel'),
+                dataSource = model.get('dataSource');
+
+            if (paramFilter) {
+                model.set('paramFilter', paramFilter);
+            } else {
+                model.set('paramFilter', undefined);
+            }
+
+            if (paramFilter && searchFilter) {
+                dataSource.filter({
+                    logic: 'and',
+                    filters: [paramFilter, searchFilter]
+                });
+            } else if (paramFilter || searchFilter) {
+                dataSource.filter(paramFilter || searchFilter);
+            } else {
+                dataSource.filter({});
+            }
+        },        
         flattenLocationProperties = function(dataItem) {
             var propName, propValue,
                 isLocation = function(value) {
@@ -78,7 +99,25 @@ app.clientesListView = kendo.observable({
         },
         dataSource = new kendo.data.DataSource(dataSourceOptions),
         clientesListViewModel = kendo.observable({
-            dataSource: dataSource
+            dataSource: dataSource,
+            itemClick: function(e) {
+
+                app.mobileApp.navigate('#components/clientesListView/details.html?uid=' + e.dataItem.uid);
+
+            },
+            detailsShow: function(e) {
+                var item = e.view.params.uid,
+                    dataSource = clientesListViewModel.get('dataSource'),
+                    itemModel = dataSource.getByUid(item);
+
+                if (!itemModel.DataAprovacao) {
+                    itemModel.DataAprovacao = String.fromCharCode(160);
+                }
+
+                clientesListViewModel.set('currentItem', null);
+                clientesListViewModel.set('currentItem', itemModel);
+            },
+            currentItem: null
         });
 
     if (typeof dataProvider.sbProviderReady === 'function') {
@@ -88,6 +127,12 @@ app.clientesListView = kendo.observable({
     } else {
         parent.set('clientesListViewModel', clientesListViewModel);
     }
+    
+    parent.set('onShow', function(e) {
+        var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null;
+
+        fetchFilteredData(param);
+    });    
 })(app.clientesListView);
 
 // START_CUSTOM_CODE_homeModel
