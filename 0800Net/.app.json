@@ -17,6 +17,8 @@
           "endlessScroll": false,
           "deleteItemButton": false,
           "deleteItemConfirmation": true,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Detail",
           "addItemForm": false,
           "editItemForm": false
         }
@@ -42,6 +44,8 @@
           "endlessScroll": false,
           "deleteItemButton": false,
           "deleteItemConfirmation": true,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Detail",
           "addItemForm": false,
           "editItemForm": false
         }
@@ -65,5 +69,8 @@
   "name": "kendoUiMobileApp",
   "navigation": "drawer",
   "view": "clientesListView",
-  "skin": "nova"
+  "skin": "nova",
+  "skinMainColor": "#32364c",
+  "skinTextColor": "#ffffff",
+  "skinAccentColor": "#ff4350"
 }
