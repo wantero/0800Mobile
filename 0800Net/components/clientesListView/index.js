@@ -102,20 +102,70 @@ app.clientesListView = kendo.observable({
             dataSource: dataSource,
             itemClick: function(e) {
 
-                app.mobileApp.navigate('#components/clientesListView/details.html?uid=' + e.dataItem.uid);
+                app.mobileApp.navigate('#components/detailsListView/details.html?uid=' + e.dataItem.uid);
 
             },
             detailsShow: function(e) {
+                
                 var item = e.view.params.uid,
                     dataSource = clientesListViewModel.get('dataSource'),
                     itemModel = dataSource.getByUid(item);
 
-                if (!itemModel.DataAprovacao) {
-                    itemModel.DataAprovacao = String.fromCharCode(160);
-                }
+                //if (!itemModel.DataAprovacao) {
+                //    itemModel.DataAprovacao = String.fromCharCode(160);
+                //}
+                
+                var dsTramite = new kendo.data.DataSource({
+                    type: "everlive",
+                    transport: {
+                        // binding to the Order type in Everlive
+                        typeName: "Tramite"
+                    },
+                    schema: {
+                        model: {
+                            id: "Id",
+                            fields: {
+                                // default Everlive fields
+                                CreatedBy:  { type: "string" },
+                                CreatedAt:  { type: "date" },
+                                ModifiedAt: { type: "date" },
 
-                clientesListViewModel.set('currentItem', null);
-                clientesListViewModel.set('currentItem', itemModel);
+                                // type fields
+                                Id:    { type: "number" },
+                                SolID: { type: "number" },
+                                TraData:  { type: "String" },
+                                Descricao:  { type: "String" },
+                                UsuID:  { type: "String" }
+                            }
+                        },
+                        parse : function(data) { //reduce text of message if being used for list
+                            $.each(data, function(i, val){                        
+                                if (i == 'result') {
+                                    for (var j = 0; j < val.length; j++) {
+                                        val[j].Descricao = atob(val[j].Descricao);
+                                    }                                                    
+                                }
+                            });
+                            return data;
+                        }                                        
+                    },
+                    serverFiltering: true,  
+                    filter: { field: "SolID", operator: "eq", value: itemModel.Id } ,
+                    serverSorting: true,
+                    sort: { field: 'Id', dir: 'asc' }                                          
+                });  
+                
+                dsTramite.read().then(function() {
+                    
+                    itemModel = dsTramite;
+                    
+                    alert(JSON.stringify(dsTramite.data()));
+                    
+                    detailsListView.set('currentItem', null);
+                    detailsListView.set('currentItem', itemModel);
+                    
+                });
+                
             },
             currentItem: null
         });
