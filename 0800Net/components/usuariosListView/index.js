@@ -93,7 +93,13 @@ app.usuariosListView = kendo.observable({
         },
         dataSource = new kendo.data.DataSource(dataSourceOptions),
         usuariosListViewModel = kendo.observable({
-            dataSource: dataSource
+            dataSource: dataSource,
+            itemClick: function (e) {
+
+                app.mobileApp.navigate('#components/detailsListView/details.html?filter={ "field" : "SolID", "operator" : "eq", "value" : "' + e.dataItem.Id + '"}');
+
+            },
+            currentItem: null
         });
 
     if (typeof dataProvider.sbProviderReady === 'function') {
