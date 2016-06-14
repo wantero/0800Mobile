@@ -1,20 +1,20 @@
 'use strict';
 
-app.clientesListView = kendo.observable({
+app.detailsListView = kendo.observable({
     onShow: function() {},
-    afterShow: function() {}
+    afterShow: function () { }
 });
 
-// START_CUSTOM_CODE_clientesListView
+// START_CUSTOM_CODE_detailsListView
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
 
-// END_CUSTOM_CODE_clientesListView
+// END_CUSTOM_CODE_detailsListView
 (function(parent) {
     var dataProvider = app.data.zeroOitocentos,
         fetchFilteredData = function(paramFilter, searchFilter) {
-            var model = parent.get('clientesListView'),
+            var model = parent.get('detailsListView'),
                 dataSource = model.get('dataSource');
-
+            
             if (paramFilter) {
                 model.set('paramFilter', paramFilter);
             } else {
@@ -51,79 +51,97 @@ app.clientesListView = kendo.observable({
             }
         },
         dataSourceOptions = {
-            type: 'everlive',
+            type: "everlive",
             transport: {
-                typeName: 'Solicitacao',
-                dataProvider: dataProvider
-            },
-            group: {
-                field: 'NomeCliente'
-            },
-
-            change: function(e) {
-                var data = this.data();
-                for (var i = 0; i < data.length; i++) {
-                    var dataItem = data[i];
-
-                    flattenLocationProperties(dataItem);
+                // binding to the Order type in Everlive
+                typeName: "Tramite",
+                dataProvider: dataProvider,
+                read: {
+                    headers: {
+                        "X-Everlive-Expand": JSON.stringify({
+                            "UsuID": {
+                                "TargetTypeName": "Usuario",
+                                "ReturnAs": "UsuNome",
+                                "SingleField": "UsuNome"
+                            }
+                        })
+                    }
                 }
             },
             schema: {
                 model: {
+                    id: "Id",
                     fields: {
-                        'Id': {
-                            field: 'Id',
-                            defaultValue: ''
-                        },
-                        'SolTitulo': {
-                            field: 'SolTitulo',
-                            defaultValue: ''
-                        },
-                        'DataAberturaSistema': {
-                            field: 'DataAberturaSistema',
-                            defaultValue: ''
-                        },
+                        // default Everlive fields
+                        CreatedBy:  { type: "string" },
+                        CreatedAt:  { type: "date" },
+                        ModifiedAt: { type: "date" },
+
+                        // type fields
+                        Id:    { type: "number" },
+                        SolID: { type: "number" },
+                        TraData:  { type: "String" },
+                        Descricao:  { type: "String" },
+                        UsuNome: { field: 'UsuNome', // show the user's DisplayName instead of the UserId
+                                   defaultValue: ''},
                     }
                 },
                 parse : function(data) { //reduce text of message if being used for list
-                    $.each(data, function(i, val){                        
+                    $.each(data, function (i, val) {
                         if (val !== undefined && i == 'result') {
                             for (var j = 0; j < val.length; j++) {
-                                val[j].DataAberturaSistema = kendo.toString(val[j].DataAberturaSistema, "d/M/yyyy hh:mm tt");
+                                val[j].Descricao = atob(val[j].Descricao);
+                                val[j].TraData = kendo.toString(val[j].TraData, "d/M/yyyy hh:mm tt");
                             }                                                    
                         }
                     });
                     return data;
-                }
+                }                                        
             },
+            serverFiltering: true,
+            serverPaging: true,
+            serverSorting: true,
+            filter: { field : "SolID", operator : "eq", value : "0"},
+            sort: { field: 'Id', dir: 'asc' }                                                      
         },
         dataSource = new kendo.data.DataSource(dataSourceOptions),
-        clientesListView = kendo.observable({
-            dataSource: dataSource,
-            itemClick: function (e) {
-
-                app.mobileApp.navigate('#components/detailsListView/details.html?filter={ "field" : "SolID", "operator" : "eq", "value" : "' + e.dataItem.Id + '"}');
-
-            },
-            currentItem: null
-        });
+		detailsListView = kendo.observable({
+            dataSource: dataSource
+        });        
 
     if (typeof dataProvider.sbProviderReady === 'function') {
         dataProvider.sbProviderReady(function dl_sbProviderReady() {
-            parent.set('clientesListView', clientesListView);
+            parent.set('detailsListView', detailsListView);
         });
     } else {
-        parent.set('clientesListView', clientesListView);
+        parent.set('detailsListView', detailsListView);
     }
     
-    parent.set('onShow', function(e) {
+    //dataSource.read().then(function() {
+
+    //});
+    
+    parent.set('onShow', function (e) {
+
         var param = e.view.params.filter ? JSON.parse(e.view.params.filter) : null;
 
-        fetchFilteredData(param);
-    });    
-})(app.clientesListView);
+        e.view.options.title = "Chamado: " + param.value;
 
-// START_CUSTOM_CODE_clientesListViewModel
+        var listView = $("#listView").data("kendoMobileListView");
+        if (listView !== undefined) {
+
+            var newDataSource = new kendo.data.DataSource(/* your data source options */);
+            listView.setDataSource(newDataSource);
+
+        }
+        
+        fetchFilteredData(param);
+        
+    });
+
+})(app.detailsListView);
+
+// START_CUSTOM_CODE_detailsListViewModel
 // Add custom code here. For more information about custom code, see http://docs.telerik.com/platform/screenbuilder/troubleshooting/how-to-keep-custom-code-changes
 
-// END_CUSTOM_CODE_clientesListViewModel
+// END_CUSTOM_CODE_detailsListViewModel

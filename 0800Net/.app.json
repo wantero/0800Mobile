@@ -56,7 +56,34 @@
       "name": "usuariosListView",
       "addToNavigation": true,
       "icon": "contacts"
-    }
+    },
+    {
+      "type": "kendo-ui-mobile:view",
+      "components": [
+        {
+          "type": "kendo-ui-mobile:editableList",
+          "listExtraFields": [],
+          "detailExtraFields": [],
+          "components": [],
+          "name": "detailsListViewModel",
+          "dataProvider": "teste",
+          "collection": "teste",
+          "headerField": "teste",
+          "isMapView": false,
+          "pullToRefresh": false,
+          "endlessScroll": false,
+          "deleteItemButton": false,
+          "deleteItemConfirmation": true,
+          "detailHeaderFieldSource": "static",
+          "detailHeaderFieldValue": "Detail",
+          "addItemForm": false,
+          "editItemForm": false
+        }
+      ],
+      "title": "Detalhes do Chamados",
+      "name": "detailsListView",
+      "addToNavigation": false
+    },      
   ],
   "dataProviders": [
     {

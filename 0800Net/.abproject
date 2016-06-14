@@ -6,7 +6,7 @@
   "DisplayName": "Chamados Abertos",
   "Author": "DLC Soluções em Tecnologia",
   "Description": "Chamados em Abertos do 0800Net",
-  "BundleVersion": "1.2",
+  "BundleVersion": "2.0",
   "AndroidVersionCode": "1",
   "iOSDeviceFamily": [
     "1",
